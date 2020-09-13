@@ -1,0 +1,41 @@
+body {
+background-color: #41b3a3;
+font-size: large;
+font-family: sans-serif;
+text-align: center;
+}
+
+ul {
+list-style-type: square;
+list-style-position: inside;
+}
+
+li {
+padding: 8px;
+}
+
+.task {
+    background-color: none;
+    font-size: larger;
+}
+
+div {
+display: inline-block;
+max-width: 800px;
+padding: 50px;
+border-radius: 25px;
+background-color: #fcb3b3;
+text-align: left;
+
+}
+
+a:link, a:visited {
+color: white;
+background-color: #f07575;
+padding: 5px 8px;
+text-decoration: none;
+}
+
+a:hover {
+background-color: red;
+}

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>To-Do List:</title>
+        <link type="text/css" rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <style>
+
+        body{
+            background-color: #3AAfA9;
+        }
+
+        input{
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            box-sizing: border-box;
+        }
+
+        input::placeholder {
+          color: #d3d3d3;
+        }
+
+        .submit{
+            background-color: #6BA3E8;
+        }
+
+        .center-column{
+            width:600px;
+            margin: 20px auto;
+            padding:20px;
+            background-color: #2b7a78;
+            border-radius: 3px;
+            box-shadow: 6px 2px 30px 0px rgba(0,0,0,0.75);
+        }
+
+        .item-row{
+            background-color: #17252a;
+            margin: 10px;
+            padding: 20px;
+            border-radius: 21px;
+            color: #fff;
+            font-size: 16px;
+            box-shadow: 0px -1px 10px -4px rgba(0,0,0,0.75);
+        }
+
+        .btn-danger{
+            background-color: #ffae19;
+            border-color: #e59400;
+    </style>
+</head>
+<body>
+<div class="center-column">
+<h1 style="text-align:center; color: #17252a;">To-Do:</h1>
+
+<ul>
+    {% for event in object_list %}
+        <li style="list-style-type:none"             class="item-row">
+            <a href="{% url 'todo:delete' event.id %}"          class="btn btn-sm btn-danger"> Done </a>
+            <a href="{% url 'todo:updatetask' event.id %}"          class="btn btn-sm btn-info" > Edit Task </a>
+            <a href="{% url 'todo:detail' event.id %}" style="color:white;font-size:larger"> {{ event.event_text }} </a>
+        </li>
+    {% endfor %}
+</ul>
+
+<form method="post">
+    <p>
+
+        {% csrf_token %}
+        <input type="text" name="new_event" size="33" id="new_event"/>
+        <input type="submit" value="Add Task"           class="btn btn-info"/>
+    </p>
+</form>
+{% if completed_length > 0 %}
+<h1 style="text-align:center; color: white; font-size:larger;">Completed:</h1>
+{% endif %}
+<ul>
+    {% for completed in completed_list %}
+        <li style="list-style-type:none;"             class="item-row">
+            <a href="{% url 'todo:deletecompleted' completed.id %}"             class="btn btn-sm btn-danger"> Delete </a>
+            <span style="color: green; font-size: larger"> {{ completed.done_text }} </span>
+        </li>
+    {% endfor %}
+</ul>
+
+{% if completed_length > 0 %}
+<div style="text-align:center;">
+    <a href="{% url 'todo:clearall' %}"             class="btn btn-sm btn-danger" > Clear All Completed </a>
+</div>
+{% endif %}
+
+</div>
+</body>
+</html>

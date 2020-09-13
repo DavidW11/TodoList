@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> {{ main_task.event_text }} </title>
+        <link type="text/css" rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <style>
+
+        body{
+            background-color: #5cdb95;
+        }
+
+        input, textarea{
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            box-sizing: border-box;
+        }
+
+        input::placeholder {
+          color: #d3d3d3;
+        }
+
+        .submit{
+            background-color: #6BA3E8;
+        }
+
+        .center-column{
+            width:600px;
+            margin: 20px auto;
+            padding:20px;
+            background-color: #8ee4af;
+            border-radius: 3px;
+            box-shadow: 6px 2px 30px 0px rgba(0,0,0,0.75);
+        }
+
+        .item-row{
+            background-color: #379683;
+            margin: 10px;
+            padding: 20px;
+            border-radius: 21px;
+            color: #fff;
+            font-size: 16px;
+            box-shadow: 0px -1px 10px -4px rgba(0,0,0,0.75);
+        }
+
+        .btn-danger{
+            background-color: #ffae19;
+            border-color: #e59400;
+        }
+
+        label {
+            font-weight:bold;
+            font-size:larger;
+            color: #379683;
+        }
+    </style>
+</head>
+<body>
+<div class="center-column">
+<h1 style="text-align:center; color: #379683;"> "{{ main_task.event_text }}" subtasks: </h1>
+
+<ul>
+    {% for task in subtask_list %}
+        <li style="list-style-type:none"             class="item-row">
+            <a href="{% url 'todo:deletesub' task.id %}"            class="btn btn-sm btn-danger"> Done </a>
+            <a href="{% url 'todo:updatesubtask' task.id %}"            class="btn btn-sm btn-info"> Edit Subtask </a>
+            <span style="color:white;"> {{ task.subtask_text }} </span>
+        </li>
+    {% endfor %}
+</ul>
+
+<form method="post">
+    <p>
+        {% csrf_token %}
+        <input type="text" name="new_subtask" size="33"/>
+        <input type="submit" value="Add Subtask"            class="btn btn-info"/> <br/> <br/>
+    </p>
+</form>
+
+<form method="post" action="{% url 'todo:adddesc' main_task.id %}">
+    {% csrf_token %}
+    <label for="description"> Description: </label> <br/>
+    <textarea name="description" rows="11" cols="40" id="description">{{main_task.description}}</textarea> <br/>
+    <input type="submit" value="Add Description"            class="btn btn-info"/>
+</form>
+
+<div style="text-align:center">
+<a href="{% url 'todo:home' %}"             class="btn btn-sm btn-danger"> Return </a>
+</div>
+
+</div>
+</body>
+</html>

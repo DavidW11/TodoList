@@ -50,6 +50,9 @@
     </style>
 </head>
 <body>
+<span style="position:fixed; top:10px; right:10px; font-size:large;"> Signed in as {{ user.username }}
+<a href="{% url 'logout' %}" class="btn btn-sm btn-info" > Logout </a>
+</span>
 <div class="center-column">
 <h1 style="text-align:center; color: #17252a;">To-Do:</h1>
 
@@ -63,7 +66,13 @@
     {% endfor %}
 </ul>
 
-<form method="post">
+<form action="" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Add Task"           class="btn btn-info"/>
+</form>
+
+<!-- <form method="post">
     <p>
 
         {% csrf_token %}
@@ -71,6 +80,7 @@
         <input type="submit" value="Add Task"           class="btn btn-info"/>
     </p>
 </form>
+
 {% if completed_length > 0 %}
 <h1 style="text-align:center; color: white; font-size:larger;">Completed:</h1>
 {% endif %}
@@ -82,13 +92,12 @@
         </li>
     {% endfor %}
 </ul>
-
 {% if completed_length > 0 %}
 <div style="text-align:center;">
     <a href="{% url 'todo:clearall' %}"             class="btn btn-sm btn-danger" > Clear All Completed </a>
 </div>
 {% endif %}
-
+-->
 </div>
 </body>
 </html>

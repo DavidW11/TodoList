@@ -10,9 +10,9 @@ urlpatterns = [
     path('delete_subtask/<int:subtask_id>', views.delete_subtask, name='deletesub'),
     path('home_page/', views.home_page, name='home'),
     path('update_task/<int:pk>', views.UpdateTask.as_view(), name='updatetask'),
-    path('update_subtask/<int:subtask_id>', views.UpdateSubtask.as_view(), name='updatesubtask'),
+    path('update_subtask/<int:pk>', views.UpdateSubtask.as_view(), name='updatesubtask'),
     path('add_desc/<int:pk>', views.add_description, name='adddesc'),
-    path('delete_completed/<int:completed_id>', views.delete_completed_task, name='deletecompleted'),
-    path('clear_all', views.clear_all, name='clearall'),
+    # path('delete_completed/<int:completed_id>', views.delete_completed_task, name='deletecompleted'),
+    # path('clear_all', views.clear_all, name='clearall'),
 
 ]

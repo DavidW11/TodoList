@@ -53,13 +53,12 @@
 <div class="center-column">
 <h1 style="text-align: center; color: #f07f1d;" > Edit "{{task.event_text}}" </h1>
 <form method="post">
-    <p>
-        {% csrf_token %}
-        <input type="text" name="new_task" size="33" id="new_task"/>
-        <a href="{% url 'todo:home' %}"             class="btn btn-sm btn-danger"> Cancel </a>
-        <span> <input type="submit" value="Update Task" style="max-width:493px;"            class="btn btn-info"/> </span>
 
-    </p>
+    {% csrf_token %}
+    {{ form }}
+    <a href="{% url 'todo:home' %}"             class="btn btn-sm btn-danger"> Cancel </a>
+    <span> <input type="submit" value="Update Task" style="max-width:493px;"            class="btn btn-info"/> </span>
+
 </form>
 </div>
 </body>

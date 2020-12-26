@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+    <title>Login Page</title>
+</head>
+<body>
+<form method="post" action="{% url 'login' %}">
+{% csrf_token %}
+{{ form.as_p }}
+<input type="submit" class="btn btn-primary" value="Login" />
+{% if next %}
+<input type="hidden" name="next" value="{{next}}" />
+{% else %}
+<input type="hidden" name="next" value="{% url 'todo:list' %}" />
+{% endif %}
+</form>
+</body>
+</html>
